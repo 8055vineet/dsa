@@ -1,0 +1,37 @@
+Given a binary tree root and a linked list with head as the first node. 
+
+Return True if all the elements in the linked list starting from the head correspond to some downward path connected in the binary tree otherwise return False.
+
+In this context downward path means a path that starts at some node and goes downwards.
+
+
+Approach : In these type of problems use recursion ,using subpath function find the matched node value(on node ,on left subtree,on right subtree) and use helper function to find the matching 
+tree traversal and linked list traversal
+
+Solution:
+
+class Solution {
+
+    public boolean helper(ListNode head, TreeNode root){
+        if(head==null)
+        return true;
+        //linked list traversed fully
+
+        if(root==null||head.val!=root.val)
+        return false;
+        
+    //tree do not exist or value does not match
+
+        return helper(head.next,root.right)||helper(head.next,root.left);
+
+    }
+    public boolean isSubPath(ListNode head, TreeNode root) {
+        if(root==null)return false;
+
+     return helper(head,root)||isSubPath(head,root.right)||isSubPath(head,root.left);
+
+    }
+}
+
+
+ 
